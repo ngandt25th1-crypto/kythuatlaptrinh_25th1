@@ -4,27 +4,72 @@ using namespace std;
 struct Author {
 	int id;
 	string name;
+	friend istream& operator >> (istream& in, Author& a) {
+		cout << " Author  information :" << endl;
+		cout << " \t+ Id :";
+		in >> a.id;
+		cout << " \t+ Name :";
+		in, ignore();
+		getline(in, a.name);
+		return in;
 };
 
 struct Book {
 	int id;
 	string name;
 	Author author;
+	friend ostream& operator<< (ostream & os, const Book& b ) {
+		os << "Book information :" << endl;
+		os << "\t+ :" << b.id << endl;
+		os << " \t+ Name  :" << b.name << endl;
+		os << " \t+  Author name :" << b.author.name << endl;
+		return os;
+	 }
+	friend istream& operator >> (istream& in, Book b) {
+		cout << " Book information :" << endl;
+		cout << " \t+ Id :";
+		in >> b.id;
+		cout << " \t+ Name :";
+		in, ignore();
+		getline(in, b.name);
+		in >> b.author;
+		return in;
+	}
 };
 
 struct Node {
 	Book data;
 	Node* next;
+	Node* Create(Bookb) {
+		Node* result = new Node;
+		result->data = b;
+		result->next = nullptr;
+		return result;
+
+	}
 };
 
 struct LinkedList {
 	Node* head;
-};
+	void Show() {
+		if (head == NULL) {
+			cout << " No book availble " << endl;
+			return;
+		}
+		Node* item =head;
+		while (item != NULL) {
+			cout << item->data;
+			item = item->next;
 
-int mian()
-{
-	LinkedList books = { NULL };
-}
+		 }
+
+	 }
+	void AddFirst(Node* p) {
+		p->next = head;
+		head = p;
+	}
+
+};
 
 int main()
 {
@@ -47,9 +92,16 @@ int main()
 		switch (choice)
 		{
 		case 1: {
+			books.Show();
 			break;
 		}
 		case 2: {
+			Book b;
+			cin >> b;
+			Node* newNode = new Node;
+			newNode->Create(b);
+			books.AddFirst(newNode);
+
 			break;
 		}
 		case 3: {
@@ -70,25 +122,12 @@ int main()
 		case 0: {
 			break;
 		}
-		  defualt: {
-			  cout << " Invalid choice , try again " << endl;
-			  break;
-
+		default: {
+			cout << " Invalid choice , try again " << endl;
+			break;
 		}
 		}
-		system("pause ");
-		cout << " Press any key yo continue,..."
-	}while ( true )
-			  
-			 
-
-
-		}
-
-
-
-		}
-
+		system("pause");
+		cout << " Press any key yo continue,...";
+	} while (true);
 }
-
-	
